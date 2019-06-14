@@ -4,8 +4,16 @@ namespace Yandex\Metrica\Management\Models;
 
 use Yandex\Common\Model;
 
+/**
+ * Class GetLogRequestsResponse
+ *
+ * @package Yandex\Metrica\Management\Models
+ */
 class GetLogRequestsResponse extends Model
 {
+    /**
+     * @var LogRequests|null
+     */
     protected $requests = null;
 
     protected $mappingClasses = [

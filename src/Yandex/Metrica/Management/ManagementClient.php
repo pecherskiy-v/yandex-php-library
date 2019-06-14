@@ -42,6 +42,14 @@ class ManagementClient extends MetricaClient
     }
 
     /**
+     * @return LogRequestsClient
+     */
+    public function logRequests()
+    {
+        return new LogRequestsClient($this->getAccessToken());
+    }
+
+    /**
      * @return GoalsClient
      */
     public function goals()

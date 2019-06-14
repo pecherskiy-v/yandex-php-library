@@ -8,32 +8,32 @@ class LogRequestsParams extends Model
 {
     protected $callback = null;
 
-    /*
-     * @var string $date1 Первый день.
-     * например: 2019-06-07
+    /**
+     * @var string|null $date1 Первый день.
+     * @example 2019-06-07
      */
     protected $date1 = null;
 
-    /*
-     * @var string $date2 Последний день (не может быть текущим днем).
-     * например: 2019-06-07
+    /**
+     * @var string|null $date2 Последний день (не может быть текущим днем).
+     * @example 2019-06-07
      */
     protected $date2 = null;
 
-    /*
+    /**
      * @see https://tech.yandex.ru/metrika/doc/api2/logs/fields/hits-docpage/
      * @see https://tech.yandex.ru/metrika/doc/api2/logs/fields/visits-docpage/
      *
-     * @var string $field Список полей через запятую.
+     * @var string|null $field Список полей через запятую.
+     * @example "ym:pv:dateTime, ym:pv:referer"
      */
     protected $field = null;
 
 
-    /*
-     * @var string $source Источник логов.
-     * Допустимые значения:
-     * hits — просмотры.
-     * visits — визиты.
+    /**
+     * @var string|null $source Источник логов.
+     * @example hits — просмотры.
+     * @example visits — визиты.
      */
     protected $source = null;
 

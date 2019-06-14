@@ -4,29 +4,65 @@ namespace Yandex\Metrica\Management\Models;
 
 use Yandex\Common\Model;
 
+/**
+ * Class LogRequestItem
+ *
+ * @package Yandex\Metrica\Management\Models
+ * @see https://tech.yandex.ru/metrika/doc/api2/logs/queries/class_logrequest-docpage/#class_logrequest
+ */
 class LogRequestItem extends Model
 {
-
+    /**
+     * @var integer|null $requestId Идентификатор запроса логов.
+     */
     protected $requestId = null;
-
+    /**
+     * @var integer|null $counterId Идентификатор счётчика.
+     */
     protected $counterId = null;
-
-//    protected $source = null;
-
+    /**
+     * @var string|null $source Источник логов.
+     * @example hits — просмотры.
+     * @example visits — визиты.
+     */
+    protected $source = null;
+    /**
+     * @var string|null $date1 Первый день.
+     */
     protected $date1 = null;
 
+    /**
+     * @var string|null $date2 Последний день (не может быть текущим днем).
+     */
     protected $date2 = null;
-
-//    protected $fields = null;
-
-//    protected $status = null;
-
+    /**
+     * @see https://tech.yandex.ru/metrika/doc/api2/logs/fields/hits-docpage/
+     * @see https://tech.yandex.ru/metrika/doc/api2/logs/fields/visits-docpage/
+     *
+     * @var string[]|null $field Список полей.
+     */
+    protected $fields = null;
+    /**
+     * @var string|null $status Статус запроса.
+     * @example processed — обработан.
+     * @example canceled — отменён.
+     * @example processing_failed — ошибка при обработке.
+     * @example created — создан.
+     * @example cleaned_by_user — очищен пользователем.
+     * @example cleaned_automatically_as_too_old — очищен автоматически.
+     */
+    protected $status = null;
+    /**
+     * @var integer|null $size Размер логов запроса в байтах.
+     */
     protected $size = null;
-
-//    protected $parts = null;
+    /**
+     * @var LogRequestsParts[]|null
+     */
+    protected $parts = null;
 
     protected $mappingClasses = [
-//        'parts' => 'Yandex\Metrica\Management\Models\LogRequestParts',
+        'parts' => 'Yandex\Metrica\Management\Models\LogRequestsParts',
     ];
 
     protected $propNameMap = [
@@ -70,7 +106,23 @@ class LogRequestItem extends Model
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getSource()
+    {
+        return $this->source;
+    }
 
+    /**
+     * @param null $source
+     * @return $this
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+        return $this;
+    }
 
     /**
      * @return string|null
@@ -108,7 +160,41 @@ class LogRequestItem extends Model
         return $this;
     }
 
+    /**
+     * @return string[]|null
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
 
+    /**
+     * @param array|null $fields
+     * @return $this
+     */
+    public function setFields($fields)
+    {
+        $this->fields = $fields;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string|null $status
+     * @return $this
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+        return $this;
+    }
 
     /**
      * @return integer|null
@@ -125,6 +211,24 @@ class LogRequestItem extends Model
     public function setSize($size)
     {
         $this->size = $size;
+        return $this;
+    }
+
+    /**
+     * @return LogRequestsParts[]|null
+     */
+    public function getParts()
+    {
+        return $this->parts;
+    }
+
+    /**
+     * @param LogRequestsParts|null $parts
+     * @return $this
+     */
+    public function setParts($parts)
+    {
+        $this->parts = $parts;
         return $this;
     }
 }

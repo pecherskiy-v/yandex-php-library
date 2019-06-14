@@ -4,9 +4,16 @@ namespace Yandex\Metrica\Management\Models;
 
 use Yandex\Common\ObjectModel;
 
+/**
+ * Class LogRequests
+ *
+ * @package Yandex\Metrica\Management\Models
+ */
 class LogRequests extends ObjectModel
 {
-
+    /**
+     * @var LogRequestItem[]|array
+     */
     protected $collection = [];
 
     protected $mappingClasses = [];
@@ -15,6 +22,8 @@ class LogRequests extends ObjectModel
 
     /**
      * Add item
+     * @param LogRequestItem|array
+     * @return $this
      */
     public function add($logRequestItem)
     {
@@ -29,6 +38,7 @@ class LogRequests extends ObjectModel
 
     /**
      * Get items
+     * @return LogRequestItem[]
      */
     public function getAll()
     {
