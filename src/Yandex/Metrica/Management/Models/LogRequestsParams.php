@@ -27,7 +27,7 @@ class LogRequestsParams extends Model
      * @var string|null $field Список полей через запятую.
      * @example "ym:pv:dateTime, ym:pv:referer"
      */
-    protected $field = null;
+    protected $fields = null;
 
 
     /**
@@ -108,24 +108,24 @@ class LogRequestsParams extends Model
     }
 
     /**
-     * Retrieve the field property
+     * Retrieve the fields property
      *
      * @return string|null
      */
-    public function getField()
+    public function getFields()
     {
-        return $this->field;
+        return $this->fields;
     }
 
     /**
-     * Set the field property
+     * Set the fields property
      *
-     * @param string $field
+     * @param string $fields
      * @return $this
      */
-    public function setField($field)
+    public function setFields($fields)
     {
-        $this->field = $field;
+        $this->fields = $fields;
         return $this;
     }
 

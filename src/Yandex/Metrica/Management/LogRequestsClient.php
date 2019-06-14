@@ -29,6 +29,21 @@ class LogRequestsClient extends ManagementClient
     }
 
     /**
+     * @param integer $id (counter id)
+     * @param Models\LogRequestsParams $params
+     *
+     * @return Models\logRequestEvaluation|null
+     */
+    public function getCounterLogRequestsEvaluate($id, Models\LogRequestsParams $params)
+    {
+        $resource = 'counter/' . $id . '/logrequests';
+        $response = $this->sendGetRequest($resource, $params->toArray());
+        $counter = new Models\GetLogRequestsEvaluateResponse($response);
+        return $counter->getLogRequestEvaluation();
+    }
+
+
+    /**
      * download counter Log Requests
      *
      * @param int $id
