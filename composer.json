@@ -1,5 +1,5 @@
 {
-    "name": "nixsolutions/yandex-php-library",
+    "name": "pecherskiy-v/yandex-php-library",
     "description": "Official Yandex PHP library",
     "keywords":["yandex","sdk"],
     "type":"library",
@@ -28,6 +28,10 @@
         {
             "name": "Yandex PHP library Contributors",
             "homepage": "https://github.com/nixsolutions/yandex-php-library/graphs/contributors"
+        },
+        {
+            "name": "Valeriy Pecherskiy",
+            "email": "pecherskiy.v@yandex.ru"
         }
     ],
     "support": {
