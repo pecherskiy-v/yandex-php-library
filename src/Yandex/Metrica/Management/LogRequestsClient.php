@@ -3,9 +3,16 @@
 namespace Yandex\Metrica\Management;
 
 
+use Yandex\Common\Exception\ForbiddenException;
+use Yandex\Common\Exception\TooManyRequestsException;
+use Yandex\Common\Exception\UnauthorizedException;
+use Yandex\Metrica\Exception\BadRequestException;
+use Yandex\Metrica\Exception\MetricaException;
+
 /**
  * Class LogRequestsClient
  * Logs API позволяет получать неагрегированные данные, собираемые Яндекс.Метрикой.
+ *
  * @see https://tech.yandex.ru/metrika/doc/api2/logs/intro-docpage/
  *
  * @category Yandex
@@ -62,21 +69,40 @@ class LogRequestsClient extends ManagementClient
         return $counter->getLogRequest();
     }
 
-
     /**
-     * download counter Log Requests
+     * Загрузка части подготовленных логов обработанного запроса
      *
-     * @param int $id
-     * @param Models\LogRequestsParams $params
-     * @return Models\Counter
+     * @param integer $counterId идентификатор счетчика.
+     * @param integer $requestId идентификатор запроса логов.
+     * @param integer $partNumber номер части подготовленных логов обработанного запроса.
+     *
+     * @return array[]
+     *
+     * @throws BadRequestException
+     * @throws ForbiddenException
+     * @throws MetricaException
+     * @throws TooManyRequestsException
+     * @throws UnauthorizedException
      */
-//    public function downloadCounterLogRequests($id, Models\LogRequestsParams $params)
-//    {
-//        $resource = 'counter/' . $id . '/logrequest/' . 3791887 . '/part/' . 0 . '/download';
-//        $response = $this->sendGetRequest($resource, $params->toArray());
-//        return $response;
-//        //        $counter = new Models\GetCounterResponse($response);
-//        //        return $counter->getCounter();
-//    }
+    public function downloadCounterLogRequestsPart($counterId, $requestId, $partNumber)
+    {
+        $resource = 'counter/' . $counterId . '/logrequest/' . $requestId . '/part/' . $partNumber . '/download';
+        $response = $this->sendRequest(
+            'GET',
+            $this->getServiceUrl($resource),
+            [
+                'headers' => [
+                    'Accept' => 'application/x-yametrika+json',
+                    'Content-Type' => 'application/x-yametrika+json',
+                    'Authorization' => 'OAuth ' . $this->getAccessToken(),
+                ]
+            ]
+        );
+        $respArray = explode("\n", $response->getBody()->getContents());
+        $func = function($string) {
+            return explode("\t", $string);
+        };
+        return array_map($func, $respArray);
+    }
 
 }
