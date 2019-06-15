@@ -36,7 +36,7 @@ class LogRequestsClient extends ManagementClient
      */
     public function getCounterLogRequestsEvaluate($id, Models\LogRequestsParams $params)
     {
-        $resource = 'counter/' . $id . '/logrequests';
+        $resource = 'counter/' . $id . '/logrequests/evaluate';
         $response = $this->sendGetRequest($resource, $params->toArray());
         $counter = new Models\GetLogRequestsEvaluateResponse($response);
         return $counter->getLogRequestEvaluation();
