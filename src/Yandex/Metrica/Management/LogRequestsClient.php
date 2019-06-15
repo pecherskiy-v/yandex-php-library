@@ -5,6 +5,8 @@ namespace Yandex\Metrica\Management;
 
 /**
  * Class LogRequestsClient
+ * Logs API позволяет получать неагрегированные данные, собираемые Яндекс.Метрикой.
+ * @see https://tech.yandex.ru/metrika/doc/api2/logs/intro-docpage/
  *
  * @category Yandex
  * @package Metrica
@@ -15,7 +17,7 @@ namespace Yandex\Metrica\Management;
 class LogRequestsClient extends ManagementClient
 {
     /**
-     * Get counter Log Requests list
+     * Список запросов логов
      *
      * @param int $id (counter id)
      * @return Models\LogRequests
@@ -29,6 +31,8 @@ class LogRequestsClient extends ManagementClient
     }
 
     /**
+     * Оценка возможности создания запроса
+     *
      * @param integer $id (counter id)
      * @param Models\LogRequestsParams $params
      *
@@ -40,6 +44,22 @@ class LogRequestsClient extends ManagementClient
         $response = $this->sendGetRequest($resource, $params->toArray());
         $counter = new Models\GetLogRequestsEvaluateResponse($response);
         return $counter->getLogRequestEvaluation();
+    }
+
+    /**
+     * Информация о запросе логов
+     *
+     * @param integer $counterId идентификатор счетчика.
+     * @param integer $requestId идентификатор запроса логов.
+     *
+     * @return Models\LogRequestItem|null
+     */
+    public function getCounterLogRequestsInfo($counterId, $requestId)
+    {
+        $resource = 'counter/' . $counterId . '/logrequests/' . $requestId;
+        $response = $this->sendGetRequest($resource);
+        $counter = new Models\GetLogRequestResponse($response);
+        return $counter->getLogRequest();
     }
 
 
