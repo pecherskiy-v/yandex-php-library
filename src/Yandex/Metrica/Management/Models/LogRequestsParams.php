@@ -25,7 +25,7 @@ class LogRequestsParams extends Model
      * @see https://tech.yandex.ru/metrika/doc/api2/logs/fields/visits-docpage/
      *
      * @var string|null $field Список полей через запятую.
-     * @example "ym:pv:dateTime, ym:pv:referer"
+     * @example "ym:pv:dateTime,ym:pv:referer"
      */
     protected $fields = null;
 
