@@ -56,7 +56,7 @@ class LogRequestsClient extends ManagementClient
      */
     public function getCounterLogRequestsInfo($counterId, $requestId)
     {
-        $resource = 'counter/' . $counterId . '/logrequests/' . $requestId;
+        $resource = 'counter/' . $counterId . '/logrequest/' . $requestId;
         $response = $this->sendGetRequest($resource);
         $counter = new Models\GetLogRequestResponse($response);
         return $counter->getLogRequest();
